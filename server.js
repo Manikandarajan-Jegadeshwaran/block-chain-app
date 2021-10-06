@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
+const { save_lottery_info } = require("./models/lotter_info");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -11,9 +12,20 @@ app.get("/", (req, res) => {
   res.send("Hi");
 });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   const email = req.body.email;
-  res.send({ email: email });
+  const amount = req.body.amount;
+
+  if (amount < 1) {
+    const errorInfo = {
+      error: true,
+      message: "Amount should be greater than 0",
+    };
+    return res.send(errorInfo);
+  }
+
+  const result = await save_lottery_info({ email, amount });
+  res.send(result);
 });
 
 app.listen(PORT, () => {
