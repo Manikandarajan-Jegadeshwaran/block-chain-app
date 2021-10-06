@@ -3,7 +3,7 @@ const dbConfig = {
   host: "127.0.0.1",
   user: "root",
   password: "mani1234",
-  database: "blockchainapp",
+  database: "blockchainapp", //ensure database should be available
 };
 
 let connection;
