@@ -4,7 +4,7 @@ const {
 } = require("../models/lotter_info");
 
 const PATH = {
-  POST_LOTTERY_INFO: "/",
+  POST_LOTTERY_INFO: "/lotter_info",
   GET_TOTAL_AMOUNT: "/totalAmount",
 };
 
