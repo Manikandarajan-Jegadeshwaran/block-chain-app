@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
-const { save_lottery_info } = require("./models/lotter_info");
+const {
+  post_lottery_info,
+  get_total_amount,
+} = require("./src/models/lotter_info");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,7 +27,12 @@ app.post("/", async (req, res) => {
     return res.send(errorInfo);
   }
 
-  const result = await save_lottery_info({ email, amount });
+  const result = await post_lottery_info({ email, amount });
+  res.send(result);
+});
+
+app.get("/totalAmount", async (req, res) => {
+  const result = await get_total_amount();
   res.send(result);
 });
 
